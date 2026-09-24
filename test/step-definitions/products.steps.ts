@@ -1,27 +1,40 @@
 import { When } from '@wdio/cucumber-framework';
 
 import { pages } from '../../test/fixtures/pages.fixture.ts';
-
-import addProductData from '../../src/data/TC_001_AddProductToCart.json'
-    with { type: 'json' };
-
-import removeProductData from '../../src/data/TC_002_RemoveProductToCart.json'
-    with { type: 'json' };
+import { getTestData } from '../../src/utils/testData.ts';
 
 
-When('I add the product to the cart', async () => {
+When(
+    'I add the product using test data {string}',
+    async (testDataFile: string) => {
 
-    await pages.productsPage.addProductToCart(
-        addProductData.productName.name
-    );
+        const data = getTestData<{
+            productName: {
+                name: string;
+            };
+        }>(`${testDataFile}.json`);
 
-});
+        await pages.productsPage.addProductToCart(
+            data.productName.name
+        );
+
+    }
+);
 
 
-When('I remove the product from the cart', async () => {
+When(
+    'I remove the product using test data {string}',
+    async (testDataFile: string) => {
 
-    await pages.productsPage.removeProductfromCart(
-        removeProductData.productName.name
-    );
+        const data = getTestData<{
+            productName: {
+                name: string;
+            };
+        }>(`${testDataFile}.json`);
 
-});
+        await pages.productsPage.removeProductfromCart(
+            data.productName.name
+        );
+
+    }
+);

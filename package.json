@@ -2,7 +2,7 @@
   "name": "mobile_webdriverio_framework_bdd",
   "type": "module",
   "devDependencies": {
-    "@types/node": "^26.5.1",
+    "@types/node": "^26.6.2",
     "@wdio/allure-reporter": "^9.31.4",
     "@wdio/appium-service": "^9.31.9",
     "@wdio/cli": "^9.31.9",

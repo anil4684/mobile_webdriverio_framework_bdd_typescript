@@ -2,12 +2,7 @@ import { When, Then } from '@wdio/cucumber-framework';
 import { expect } from '@wdio/globals';
 
 import { pages } from '../../test/fixtures/pages.fixture.ts';
-
-import addProductData from '../../src/data/TC_001_AddProductToCart.json'
-    with { type: 'json' };
-
-import removeProductData from '../../src/data/TC_002_RemoveProductToCart.json'
-    with { type: 'json' };
+import { getTestData } from '../../src/utils/testData.ts';
 
 
 When('I open the cart', async () => {
@@ -17,25 +12,43 @@ When('I open the cart', async () => {
 });
 
 
-Then('the product should be present in the cart', async () => {
+Then(
+    'the product should be present in the cart using test data {string}',
+    async (testDataFile: string) => {
 
-    const isPresent =
-        await pages.yourCartPage.isProductPresent(
-            addProductData.productName.name
-        );
+        const data = getTestData<{
+            productName: {
+                name: string;
+            };
+        }>(`${testDataFile}.json`);
 
-    await expect(isPresent).toBe(true);
+        const isPresent =
+            await pages.yourCartPage.isProductPresent(
+                data.productName.name
+            );
 
-});
+        await expect(isPresent).toBe(true);
+
+    }
+);
 
 
-Then('the product should not be present in the cart', async () => {
+Then(
+    'the product should not be present in the cart using test data {string}',
+    async (testDataFile: string) => {
 
-    const isPresent =
-        await pages.yourCartPage.isProductPresent(
-            removeProductData.productName.name
-        );
+        const data = getTestData<{
+            productName: {
+                name: string;
+            };
+        }>(`${testDataFile}.json`);
 
-    await expect(isPresent).toBe(false);
+        const isPresent =
+            await pages.yourCartPage.isProductPresent(
+                data.productName.name
+            );
 
-});
+        await expect(isPresent).toBe(false);
+
+    }
+);

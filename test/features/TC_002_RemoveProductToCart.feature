@@ -6,7 +6,7 @@ Feature: Remove Product from Cart
 
   @TC_002_RemoveProductToCart
   Scenario: Remove product from cart
-    When I add the product to the cart
-    And I remove the product from the cart
+    When I add the product using test data "TC_002_RemoveProductToCart"
+    And I remove the product using test data "TC_002_RemoveProductToCart"
     And I open the cart
-    Then the product should not be present in the cart
+    Then the product should not be present in the cart using test data "TC_002_RemoveProductToCart"

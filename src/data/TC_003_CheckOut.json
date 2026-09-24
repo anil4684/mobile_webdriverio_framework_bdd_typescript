@@ -1,6 +1,10 @@
 {
-"productName": "Sauce Labs Backpack",
-"firstName": "Anil",
-"lastName": "Kumar",
-"zipCode": "560001"
+    "productName": {
+        "name": "Sauce Labs Backpack"
+    },
+    "checkoutInformation": {
+        "firstName": "Anil",
+        "lastName": "Kumar",
+        "zipCode": "560001"
+    }
 }

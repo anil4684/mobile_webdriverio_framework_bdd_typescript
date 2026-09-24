@@ -15,11 +15,15 @@ export class YourCartPage {
         await this.checkOut().click();
     }
 
-    async isProductPresent(productName: string): Promise<boolean> {
-    const product =  $(
-        `//*[@text="${productName}"]`
-    );
+async isProductPresent(productName: string): Promise<boolean> {
+    const product = $(`//*[@text="${productName}"]`);
 
-    return await product.isDisplayed();
+    await browser.pause(3000);
+
+    console.log('Product name:', productName);
+    console.log('Exists:', await product.isExisting());
+    console.log('Displayed:', await product.isDisplayed());
+
+    return await product.isExisting();
 }
 }
